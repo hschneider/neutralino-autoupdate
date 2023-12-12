@@ -16,7 +16,7 @@ This cross-platform auto-updater comes with the following features:
 
 <img src="https://marketmix.com/git-assets/neutralino-autoupdate/neutralino-autoupdate.gif">
 
-To run this demo cd to its folder and enter
+To run this demo cd to its folder, copy your platform's binaries like described in **"Neutralino App Setup"** and enter:
 ```bash
 neu update
 neu run
