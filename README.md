@@ -112,7 +112,7 @@ The fields in detail:
 
 | Key        | Description                                                  |
 | ---------- | ------------------------------------------------------------ |
-| enabled    | Set this to false, to **lock incoming update requests** while you upload new versions. Set it back to true, when you updated the manifest itself. |
+| enabled    | Set this to false, to **lock client-side processing** while you upload new versions. Set it back to true, when you updated the manifest itself. |
 | appId      | The app ID, equal to the **applicationId** in the neutralino.config.json |
 | appName    | The app-name, as displayed in the update dialog.             |
 | appVersion | The current app-version. This is compared against the running app's version. |
@@ -145,7 +145,7 @@ If you are already live with autoupdate-enabled apps in the wild, disable the ma
 "enabled": false,
 ```
 
-Then first save the file. Now all incoming update requests are blocked.
+Then first save the file. Now all clients downloading the manifest cannot process the file. This assures that they only get consitent updates.
 
 Adapt the manifest's content and generate the **checksums** for each update-file:
 
@@ -175,7 +175,7 @@ After the setup of your update-repository is complete, enable your manifest with
 "enabled": true,
 ```
 
-Now all incoming update requests are processed.
+Now all clients can process the manifest.
 
 ## Neutralino App Setup
 
