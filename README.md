@@ -16,6 +16,12 @@ This cross-platform auto-updater comes with the following features:
 
 <img src="https://marketmix.com/git-assets/neutralino-autoupdate/neutralino-autoupdate.gif">
 
+To run this demo cd to its folder and enter
+```bash
+neu update
+neu run
+```
+
 ## The update process
 
 The update procedure in detail:
