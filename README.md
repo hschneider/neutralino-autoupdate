@@ -198,7 +198,15 @@ let AUTOUPDATE = new NeutralinoAutoupdate("https://autoupdate.test/demo/manifest
 })();
 ```
 
-If something goes wrong, you can track all actions in your app's dev-console, as long as the debug parameter is true.
+Next copy the **js/neutralino-autoupdate folder** to your project. 
+
+Then add this line to your **index.html**, right before the main.js script:
+
+```html
+ <script src="js/neutralino-autoupdate/autoupdate.js"></script>
+```
+
+That's it. If something goes wrong, you can track all actions in your app's dev-console, as long as the debug parameter is true.
 
 ## NeutralinoAutoupdate Class Overview
 
