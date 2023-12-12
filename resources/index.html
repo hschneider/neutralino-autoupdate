@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>NeutralinoJs sample app</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <div id="neutralinoapp">
+      <h1>NeutralinoJs Autoupdate</h1>
+      <div style="margin-top:20px">
+        <p>
+          This app checks for updates on start.<br>
+          If an update is available, a modal dialog pops up.
+        </p>
+        <p>
+          To run this demo, copy the content of the server-folder to some webserver and adapt the URL in index.html.<br>
+          Don't forget to include server/.htaccess to bypass CORS.
+        </p>
+      </div>
+    </div>
+    <!-- Neutralino.js client. This file is gitignored,
+        because `neu update` typically downloads it.
+        Avoid copy-pasting it.
+        -->
+    <script src="js/neutralino.js"></script>
+    <!-- Your app's source files -->
+    <script src="js/neutralino-autoupdate/autoupdate.js"></script>
+    <script src="js/main.js"></script>
+
+  </body>
+</html>

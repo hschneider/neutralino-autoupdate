@@ -1,0 +1,11 @@
+<FilesMatch "\.json$">
+    Header set Access-Control-Allow-Origin "*"
+    Header set Access-Control-Allow-Methods "GET, OPTIONS"
+    Header set Access-Control-Allow-Headers "Content-Type,Authorization"
+</FilesMatch>
+<FilesMatch "\.html$">
+    Header set Access-Control-Allow-Origin "*"
+    Header set Access-Control-Allow-Methods "GET, OPTIONS"
+    Header set Access-Control-Allow-Headers "Content-Type,Authorization"
+</FilesMatch>
+
