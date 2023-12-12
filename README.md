@@ -2,7 +2,7 @@
 <img src="https://marketmix.com/git-assets/neutralino-autoupdate/neutralino-autoupdate.jpg">
 </p>
 
-# neutralino-autoupdater
+# neutralino-autoupdate
 
 **An extended Auto-Updater for Neutralino**
 
