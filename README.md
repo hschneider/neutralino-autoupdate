@@ -12,7 +12,7 @@ This cross-platform auto-updater comes with the following features:
 - Launches DMG-Files on macOS and executable installers on Windows and Linux.
 - Displays a nice install dialog with app icon, version infos and release notes.
 - Uses a single manifest for all platforms and CPU-architectures.
-- Written in pure JS, no Neutralino Extensions or other dependencies required.
+- Written in pure JS, no Neutralino Extensions or other dependencies required. 
 
 ![NeutralinoAutoupdate](https://marketmix.com/git-assets/neutralino-autoupdate/neutralino-autoupdate.gif)
 
