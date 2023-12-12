@@ -14,7 +14,7 @@ This cross-platform auto-updater comes with the following features:
 - Uses a single manifest for all platforms and CPU-architectures.
 - Written in pure JS, no Neutralino Extensions or other dependencies required. 
 
-<img src="https://marketmix.com/git-assets/neutralino-autoupdate/neutralino-autoupdate2.gif">
+<img src="https://marketmix.com/git-assets/neutralino-autoupdate/neutralino-autoupdate.gif">
 
 ## The update process
 
