@@ -112,7 +112,7 @@ The fields in detail:
 
 | Key        | Description                                                  |
 | ---------- | ------------------------------------------------------------ |
-| enabled    | Set this to false, to **lock client-side processing** while you upload new versions. Set it back to true, when you updated the manifest itself. |
+| enabled    | Set this to false, to **lock client-side processing** while you upload new versions or change the manifest itself. Set it back to true, when you completed all changes. |
 | appId      | The app ID, equal to the **applicationId** in the neutralino.config.json |
 | appName    | The app-name, as displayed in the update dialog.             |
 | appVersion | The current app-version. This is compared against the running app's version. |
