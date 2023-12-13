@@ -217,7 +217,7 @@ AUTOUPDATE.checkSilent().then(res => {
     if(res) {
         //
         // YOUR CUSTOM CODE HERE:
-				// Communicate the available update to the user
+	// Communicate the available update to the user
         // and launch the update-process:
         //
         AUTOUPDATE.update();
