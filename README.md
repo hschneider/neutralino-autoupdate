@@ -1,5 +1,5 @@
 <p align="center">
-<img src="https://marketmix.com/git-assets/neutralino-autoupdate/neutralino-autoupdate.jpg">
+<img src="https://marketmix.com/git-assets/neutralino-autoupdate/neutralino-autoupdate.svg" width="400" height="400">
 </p>
 
 # neutralino-autoupdate
