@@ -35,7 +35,7 @@
   "updateLinuxX64":
     {
       "file": "AutoupdateDemo_linux-x64.zip",
-      "checksum": "231",
+      "checksum": "fc37472674da4e978ebec2eaf66abb5d1d9c1e033f3d11f1b1d2eec03e0eb612",
       "start": "AutoupdateDemo_linux-x64/install.sh",
       "notes": "release-notes.html"
     },
