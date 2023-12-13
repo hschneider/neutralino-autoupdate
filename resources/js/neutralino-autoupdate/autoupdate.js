@@ -20,15 +20,20 @@ class NeutralinoAutoupdate {
         // opt debug: Toggle console debug output
         // opt lang: Dialog language, defaults to en
 
-        this.version = '1.0.9';
+        this.version = '1.1.1';
         this.debug = opt.debug || true;
-
-        this.headers = new Headers();       // Custom request headers
 
         this.urlManifest = urlManifest;     // Manifest URL
         this.manifest = undefined;          // Manifest object
         this.os = NL_OS;                    // OS platform
         this.arch = opt.arch || 'x64';      // CPU architecture
+        this.token = opt.token || '';       // X-Auth-App Token
+
+        this.headers = new Headers();       // Custom request headers
+        if(this.token !== '') {
+            this.addHeader('X-Auth-App', this.token);
+        }
+
         this.updKey = 'update' + this.os + this.arch.toUpperCase();     // Manifest update-key: updateOsARCH
         this.updating = false;              // True while .update() is running
 
@@ -79,7 +84,7 @@ class NeutralinoAutoupdate {
 
         // Expand variables
         //
-        let s = this.urlManifest.replace('manifest.json', this.manifest.appIcon)
+        let s = this.urlManifest.replace(/manifest.*$/, this.manifest.appIcon)
         d = d.replace('{appIcon}', s);
 
         s = this.langStrings[this.lang]['txtNewVersion'];
@@ -96,7 +101,7 @@ class NeutralinoAutoupdate {
 
         // Import Release notes
         //
-        let url = this.urlManifest.replace('manifest.json', this.manifest[this.updKey]['notes']);
+        let url = this.urlManifest.replace(/manifest.*$/, this.manifest[this.updKey]['notes']);
         const response = await fetch(url, {
             method: 'GET',
             cache: 'no-store',
@@ -139,6 +144,8 @@ class NeutralinoAutoupdate {
         // Add custom request-headers
 
         this.headers.append(key, val);
+        console.log(this.headers)
+
     }
     _modalClose() {
         //
@@ -247,7 +254,7 @@ class NeutralinoAutoupdate {
         this._loaderOn();
         let cmd;
         let f = this.manifest[this.updKey]['file'];
-        let url = this.urlManifest.replace('manifest.json', f);
+        let url = this.urlManifest.replace(/manifest.*$/, f);
         this.log("Downloading update: " + url);
 
         if(NL_OS === 'Darwin' || NL_OS === 'Linux') {

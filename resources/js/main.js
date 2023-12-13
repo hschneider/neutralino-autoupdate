@@ -14,9 +14,21 @@ Neutralino.events.on("windowClose", onWindowClose);
     await Neutralino.window.setTitle(`Neutralino Autoupdate ${NL_APPVERSION}`);
 })();
 
+// Check for update
+//
+let opt = {
+    lang: 'en',
+    debug: true,
+    token: 'hB9rV7cS3tD3bU1wA8vY3pQ5fO4qO6sP'
+}
+let AUTOUPDATE = new NeutralinoAutoupdate("https://autoupdate.test/demo/manifest.php", opt);
+(async () => {
+    await AUTOUPDATE.check();
+})();
+
 /* Silent update example:
 
-let AUTOUPDATE = new NeutralinoAutoupdate("https://autoupdate.test/demo/manifest.json");
+let AUTOUPDATE = new NeutralinoAutoupdate("https://autoupdate.test/demo/manifest.json", opt);
 AUTOUPDATE.checkSilent().then(updateAvailable => {
     if(updateAvailable) {
         //
@@ -29,8 +41,3 @@ AUTOUPDATE.checkSilent().then(updateAvailable => {
 });
 
 */
-
-let AUTOUPDATE = new NeutralinoAutoupdate("https://autoupdate.test/demo/manifest.json", {lang: 'en', debug: true});
-(async () => {
-    await AUTOUPDATE.check();
-})();

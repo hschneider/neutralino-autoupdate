@@ -12,7 +12,10 @@ This cross-platform auto-updater comes with the following features:
 - Launches DMG-Files on macOS and executable installers on Windows and Linux.
 - Displays a nice install dialog with app icon, version infos and release notes.
 - Uses a single manifest for all platforms and CPU-architectures.
+- The manifest can optionally be secured with an app token.
 - Written in pure JS, no Neutralino Extensions or other dependencies required. 
+
+
 
 <img src="https://marketmix.com/git-assets/neutralino-autoupdate/neutralino-autoupdate.gif">
 
@@ -217,7 +220,7 @@ AUTOUPDATE.checkSilent().then(updateAvailable => {
     if(updateAvailable) {
         //
         // YOUR CUSTOM CODE HERE:
-	// Communicate the available update to the user
+        // Communicate the available update to the user
         // and launch the update-process:
         //
         AUTOUPDATE.update();
@@ -226,6 +229,59 @@ AUTOUPDATE.checkSilent().then(updateAvailable => {
 ```
 
 That's it. If something goes wrong, you can track all actions in your app's dev-console, as long as the debug parameter is true.
+
+## Make it more secure
+
+You can secure the access to the manifest by a secret app token when using **manifest.php** instead of **manifest.json**. The app token is sent with each update request and validated by the PHP-Script. Requests with invalid tokens are rejected.
+
+Here is how to set it up:
+
+Modify the URL and add the token in **main.js**:
+
+```js
+let opt = {
+    lang: 'en',
+    debug: true,
+    token: 'hB9rV7cS3tD3bU1wA8vY3pQ5fO4qO6sP'
+}
+let AUTOUPDATE = new NeutralinoAutoupdate("https://autoupdate.test/demo/manifest.php", opt);
+(async () => {
+    await AUTOUPDATE.check();
+})();
+```
+
+Remove this part from the .**htaccess-file**:
+
+```
+<FilesMatch "\.json$">
+    Header set Access-Control-Allow-Origin "*"
+    Header set Access-Control-Allow-Methods "GET, OPTIONS"
+    Header set Access-Control-Allow-Headers "Content-Type,X-Auth-App"
+</FilesMatch>
+```
+
+> If you used NeutralinoIAutoupdate  < v1.1.1, replace the .htaccess-file on your server with the current one. Then remove the paragraph above. This is necessary to have X-Auth-App in the allowed headers list.
+
+Add the same token to **manifest.php**:
+
+```php
+// update.php 1.0.0
+//
+// Adds a security layer to the update mechanism:
+// This script checks the incoming request for the secret app token
+// in the X-Auth-App header.
+// Only when this token is valid, the manifest.json will be delivered.
+//
+// (c)2023 Harald Schneider - marketmix.com
+//
+
+// Enter the individual app token here:
+//
+$appToken = 'hB9rV7cS3tD3bU1wA8vY3pQ5fO4qO6sP';
+...
+```
+
+Feel free to adapt the PHP script to your needs. So you could e.g. rename manifest.json to manifest.data which makes it accessible only through manifest.php.
 
 ## Run the Demo
 
@@ -241,13 +297,18 @@ neu run
 NeutralinoAutoupdate(url, {lang: 'de', debug: false, arch='arm64'})
 ```
 
-The class itself takes the **manifest's URL** and a dictionary of options as parameters. **Options** are:
+The class itself takes the **manifest's URL** and a dictionary of options as parameters. 
+
+The **URL** can either point to **manifest.json** or the more secure PHP wrapper **manifest.php**. If you use the wrapper, you need to submit a token with the options.
+
+**Options** are:
 
 | Key   | Description                                                  |
 | ----- | ------------------------------------------------------------ |
 | arch  | The app's CPU architecture. By default **'x64'**             |
 | debug | Log all actions to the dev-console. This is **true** by default. |
 | lang  | The GUI language. **'en'** for english by default. You can set it to 'de' for german. |
+| token | The secret app token, used by **manifest.php**.              |
 
 NeutralinoAutoupdate provides the following **methods**:
 
