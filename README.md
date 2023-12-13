@@ -102,6 +102,7 @@ The manifest contains all information required by the update process:
   {
     "file": "",
     "checksum": "",
+    "start": "",
     "notes": ""
   }
 }
