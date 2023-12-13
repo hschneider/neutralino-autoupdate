@@ -20,7 +20,7 @@ class NeutralinoAutoupdate {
         // opt debug: Toggle console debug output
         // opt lang: Dialog language, defaults to en
 
-        this.version = '1.0.8';
+        this.version = '1.0.9';
         this.debug = opt.debug || true;
 
         this.headers = new Headers();       // Custom request headers
