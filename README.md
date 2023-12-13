@@ -16,6 +16,8 @@ This cross-platform auto-updater comes with the following features:
 
 <img src="https://marketmix.com/git-assets/neutralino-autoupdate/neutralino-autoupdate.gif">
 
+<img src="https://marketmix.com/git-assets/neutralino-autoupdate/neutralino-autoupdate-dialog.jpg">
+
 ## The update process
 
 The update procedure in detail:
