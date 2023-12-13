@@ -240,7 +240,7 @@ NeutralinoAutoupdate provides the following **methods**:
 | addHeader(key, value) | Add an additional header to all fetch requests. This can be used for custom authentication, e.g. when you generate the manifest with a PHP script. |
 | async check()         | Check the update manifest's version against the app's version. If an update exists, a dialog pops up. |
 | async checkSilent()   | Does the same as .check() but without dialog. If an update exists, it returns true. |
-| async update()        | Starts the update process. Returns false in case of an error or quits the app if the update was successful. This is either called from the dialog's install-button or manually if you use  .checkSilent(). |
+| async update()        | Starts the update process. Returns false in case of an error or quits the app if the update was successful. This is either called from the dialog's install-button or manually together with  .checkSilent(). |
 | log(msg)              | The internal log function. msg can be a string or an object. This logs msg to the app's console. |
 
 ## More about Neutralino
