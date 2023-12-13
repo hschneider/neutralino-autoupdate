@@ -181,7 +181,7 @@ Now all clients can process the manifest.
 
 Copy the **_install/PLATFORM/bin** folder to your app's **resources** folder. E.g.
 
-`_install/macos/bin --> resources/bin`
+`_install/macos-x64/bin --> resources/bin`
 
 If you are on **macOS** or **Linux**, make sure the binaries are executable:
 
