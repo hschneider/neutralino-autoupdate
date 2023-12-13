@@ -167,7 +167,7 @@ If you run a **NGINX** proxy server, you'll have to add this to your NGINX confi
 location /path/to/your/update/folder {
 	add_header 'Access-Control-Allow-Origin'  '*';
 	add_header 'Access-Control-Allow-Methods' 'GET';
-	add_header 'Access-Control-Allow-Headers' 'Content-Type, Authorization';
+	add_header 'Access-Control-Allow-Headers' 'Content-Type';
 	add_header 'Access-Control-Expose-Headers' 'Content-Length';
 }
 ```
