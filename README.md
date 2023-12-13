@@ -209,6 +209,22 @@ let AUTOUPDATE = new NeutralinoAutoupdate("https://autoupdate.test/demo/manifest
 })();
 ```
 
+If you don't want the nice update dialog, you can use .checkSilent() instead and handle the following update process yourself:
+
+```js
+let AUTOUPDATE = new NeutralinoAutoupdate("https://autoupdate.test/demo/manifest.json");
+AUTOUPDATE.checkSilent().then(res => {
+    if(res) {
+        //
+        // YOUR CUSTOM CODE HERE:
+				// Communicate the available update to the user
+        // and launch the update-process:
+        //
+        AUTOUPDATE.update();
+    }
+});
+```
+
 That's it. If something goes wrong, you can track all actions in your app's dev-console, as long as the debug parameter is true.
 
 ## Run the Demo

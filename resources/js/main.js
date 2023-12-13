@@ -19,7 +19,11 @@ Neutralino.events.on("windowClose", onWindowClose);
 let AUTOUPDATE = new NeutralinoAutoupdate("https://autoupdate.test/demo/manifest.json");
 AUTOUPDATE.checkSilent().then(res => {
     if(res) {
-        // Do something then run the update:
+        //
+        // YOUR CUSTOM CODE HERE:
+        // Communicate the available update to the user
+        // and launch the update-process:
+        //
         AUTOUPDATE.update();
     }
 });
