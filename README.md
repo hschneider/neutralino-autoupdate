@@ -213,8 +213,8 @@ If you don't want the nice update dialog, you can use .checkSilent() instead and
 
 ```js
 let AUTOUPDATE = new NeutralinoAutoupdate("https://autoupdate.test/demo/manifest.json");
-AUTOUPDATE.checkSilent().then(res => {
-    if(res) {
+AUTOUPDATE.checkSilent().then(updateAvailable => {
+    if(updateAvailable) {
         //
         // YOUR CUSTOM CODE HERE:
 	// Communicate the available update to the user
