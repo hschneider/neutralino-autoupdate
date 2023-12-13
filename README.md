@@ -219,6 +219,10 @@ neu run
 
 ## NeutralinoAutoupdate Class Overview
 
+```JS
+NeutralinoAutoupdate(url, {lang: 'de', debug: false, arch='arm64'})
+```
+
 The class itself takes the **manifest's URL** and a dictionary of options as parameters. **Options** are:
 
 | Key   | Description                                                  |
