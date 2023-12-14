@@ -241,7 +241,7 @@ let AUTOUPDATE = new NeutralinoAutoupdate("https://autoupdate.test/demo/manifest
 })();
 ```
 
-If you don't want the nice update dialog, you can use .checkSilent() instead and handle the following update process yourself:
+If you don't want the nice update dialog, you can **use .checkSilent() instead** and handle the following update process yourself:
 
 ```js
 let opt = {
