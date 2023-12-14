@@ -19,6 +19,7 @@ Neutralino.events.on("windowClose", onWindowClose);
 let opt = {
     lang: 'en',
     debug: true,
+    arch: 'x64',
     token: 'hB9rV7cS3tD3bU1wA8vY3pQ5fO4qO6sP'
 }
 let AUTOUPDATE = new NeutralinoAutoupdate("https://autoupdate.test/demo/manifest.php", opt);
