@@ -25,7 +25,7 @@ This cross-platform auto-updater comes with the following features:
 
 The update procedure in detail:
 
-- When the app launches, the **manifest.json** file is fetched from the update server. You can either work with this file or with your own custom code, which returns the manifest as a JSON document.
+- When the app launches, the **manifest.json** file is fetched from the update server. 
 - The manifest's app version is checked against the running app's version.
 - If an update exists, the update dialog pops up.
 - The user can read the release notes and decides to skip or install the update.
