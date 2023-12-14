@@ -235,7 +235,6 @@ let opt = {
 }
 
 let AUTOUPDATE = new NeutralinoAutoupdate("https://autoupdate.test/demo/manifest.php", opt);
-
 (async () => {
     await AUTOUPDATE.check();
 })();
@@ -252,7 +251,6 @@ let opt = {
 }
 
 let AUTOUPDATE = new NeutralinoAutoupdate("https://autoupdate.test/demo/manifest.php", opt);
-
 AUTOUPDATE.checkSilent().then(updateAvailable => {
     if(updateAvailable) {
         //
