@@ -20,7 +20,7 @@ class NeutralinoAutoupdate {
         // opt debug: Toggle console debug output
         // opt lang: Dialog language, defaults to en
 
-        this.version = '1.1.1';
+        this.version = '1.1.2';
         this.debug = opt.debug || true;
 
         this.urlManifest = urlManifest;     // Manifest URL
