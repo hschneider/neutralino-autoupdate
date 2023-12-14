@@ -230,7 +230,7 @@ Add these lines to your **main.js** and adapt the manifest's URL to your own ser
 let opt = {
     lang: 'en',
     debug: true,
-  	arch: 'x64',
+    arch: 'x64',
     token: 'hB9rV7cS3tD3bU1wA8vY3pQ5fO4qO6sP'
 }
 
@@ -247,7 +247,7 @@ If you don't want the nice update dialog, you can use .checkSilent() instead and
 let opt = {
     lang: 'en',
     debug: true,
-  	arch: 'x64',
+    arch: 'x64',
     token: 'hB9rV7cS3tD3bU1wA8vY3pQ5fO4qO6sP'
 }
 
