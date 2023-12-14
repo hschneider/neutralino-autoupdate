@@ -175,7 +175,7 @@ location /path/to/your/update/folder {
 }
 ```
 
-Next create a **secret security token** with any password generator of your choice and enter it in **manifest.php**:
+Next create a **secret security token** with some password generator of your choice and enter it in **manifest.php**:
 
 ```php
 // update.php 1.0.0
