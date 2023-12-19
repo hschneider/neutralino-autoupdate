@@ -22,9 +22,8 @@
     background: #2b2b2b;
     border-radius: 9px;
     padding: 20px 20px 20px 20px;
-    height: auto;
+    height: fit-content;
     min-height: 40px;
-    max-height: 40px;
     max-width: 500px;
     overflow: hidden;
     font-family: 'San Francisco', 'Helvetica Neue', 'Lucida Grande', sans-serif;

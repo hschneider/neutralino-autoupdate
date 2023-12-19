@@ -20,7 +20,7 @@ class NeutralinoAutoupdate {
         // opt debug: Toggle console debug output
         // opt lang: Dialog language, defaults to en
 
-        this.version = '1.1.4';
+        this.version = '1.1.5';
         this.debug = opt.debug || true;
 
         this.urlManifest = urlManifest;     // Manifest URL
@@ -55,16 +55,16 @@ class NeutralinoAutoupdate {
                 'txtAskUpdate': 'You have version {versionCurrent}. Do you want to install version {versionUpdate}?',
                 'btnCancel': 'Not yet',
                 'btnOK': 'Install',
-                'errorChecksum': "Ooops - Update failed: The download seems to be corrupted.",
-                'errorUnpack': 'Ooops - Update failed: Download cannot be unpacked.'
+                'errorChecksum': "Ooops - Update failed: The download seems to be corrupted.<br>You can close this message and try to update again later.",
+                'errorUnpack': 'Ooops - Update failed: Download cannot be unpacked<br>You can close this message and try to update again later.'
             },
             'de': {
                 'txtNewVersion': 'Eine neue Version von {appName} ist verfügbar.',
                 'txtAskUpdate': 'Sie haben Version {versionCurrent}. Möchten Sie Version {versionUpdate} installieren?',
                 'btnCancel': 'Jetzt nicht',
                 'btnOK': 'Installieren',
-                'errorChecksum': "Ooops - Update Error: Der Download ist anscheinend defekt.",
-                'errorUnpack': 'Ooops - Update Error: Der Download kann nicht entpackt werden.'
+                'errorChecksum': "Ooops - Update Error: Der Download ist anscheinend defekt.<br>Du kannst diesen Dialog schließen und es später noch mal versuchen.",
+                'errorUnpack': 'Ooops - Update Error: Der Download kann nicht entpackt werden.<br>Du kannst diesen Dialog schließen und es später noch mal versuchen.'
             }
         }
 
