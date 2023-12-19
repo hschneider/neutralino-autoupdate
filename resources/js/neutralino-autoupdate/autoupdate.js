@@ -20,14 +20,14 @@ class NeutralinoAutoupdate {
         // opt debug: Toggle console debug output
         // opt lang: Dialog language, defaults to en
 
-        this.version = '1.1.2';
+        this.version = '1.1.3';
         this.debug = opt.debug || true;
 
         this.urlManifest = urlManifest;     // Manifest URL
         this.manifest = undefined;          // Manifest object
         this.os = NL_OS;                    // OS platform
         this.arch = opt.arch || 'x64';      // CPU architecture
-        this.token = opt.token || '';       // X-Auth-App Token
+        this.token = opt.token || '';       // X-Auth-App token
 
         this.headers = new Headers();       // Custom request headers
         if(this.token !== '') {
@@ -54,13 +54,17 @@ class NeutralinoAutoupdate {
                 'txtNewVersion': 'A new version of {appName} is available.',
                 'txtAskUpdate': 'You have version {versionCurrent}. Do you want to install version {versionUpdate}?',
                 'btnCancel': 'Not yet',
-                'btnOK': 'Install'
+                'btnOK': 'Install',
+                'errorChecksum': "Update failed: The download seems to be corrupted.",
+                'errorUnpack': 'Update failed: Download cannot be unpacked.'
             },
             'de': {
                 'txtNewVersion': 'Eine neue Version von {appName} ist verfügbar.',
                 'txtAskUpdate': 'Sie haben Version {versionCurrent}. Möchten Sie Version {versionUpdate} installieren?',
                 'btnCancel': 'Jetzt nicht',
-                'btnOK': 'Installieren'
+                'btnOK': 'Installieren',
+                'errorChecksum': "Update Error: Der Download ist anscheinend defekt.",
+                'errorUnpack': 'Update Error: Der Download kann nicht entpackt werden.'
             }
         }
 
@@ -138,6 +142,11 @@ class NeutralinoAutoupdate {
         this.modalBtnCancel.addEventListener('click', () => {
             this._modalClose();
         });
+
+        this.alertBtnClose = document.getElementById('_autoupdate_alert_btnClose');
+        this.alertBtnClose.addEventListener('click', () => {
+            this._alertClose();
+        });
     }
     addHeader(key, val) {
         //
@@ -176,6 +185,34 @@ class NeutralinoAutoupdate {
         let e = document.querySelector('._autoupdate_modal');
         e.style.opacity = '1';
         e.style.visibility = 'visible';
+    }
+    _reportError(code) {
+        var msg = this.langStrings[this.lang][code];
+        this._modalClose();
+
+        let e = document.getElementById('_autoupdate_alert_msg')
+        e.innerHTML = msg;
+        e = document.querySelector('._autoupdate_alert');
+        e.style.opacity = '1';
+        e.style.visibility = 'visible';
+    }
+    _alertClose() {
+        //
+        // Close alert dialog.
+
+        let e = document.querySelector('._autoupdate_modal_inner');
+        e.classList.add('animate__fadeOutUp');
+
+        setTimeout( () => {
+            e = document.querySelector('._autoupdate_alert');
+            e.classList.add('animate__animated');
+            e.classList.add('animate__fadeOut');
+            e.classList.add('animate__faster');
+            setTimeout( () => {
+                e.style.opacity = '0';
+                e.style.visibility = 'hidden';
+            }, 500);
+        }, 500);
     }
     async check() {
         //
@@ -284,6 +321,7 @@ class NeutralinoAutoupdate {
             this.log('ERROR: Download checksum mismatch.');
             this._loaderOff();
             this.updating = false;
+            this._reportError('errorChecksum');
             return false;
         }
         this.log('Checksum OK.')
@@ -310,6 +348,7 @@ class NeutralinoAutoupdate {
         if(res.exitCode === 1) {
             this.log("Unpack failed.")
             this.updating = false;
+            this._reportError('errorUnpack');
             return false;
         }
 

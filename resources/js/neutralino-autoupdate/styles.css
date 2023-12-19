@@ -1,3 +1,70 @@
+._autoupdate_alert {
+    opacity: 0;
+    visibility: hidden;
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    text-align: left;
+    background: rgba(0,0,0, .7);
+    transition: opacity .25s ease;
+}
+._autoupdate_alert_inner {
+    transition: top .25s ease;
+    position: absolute;
+    top: -50%;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: 75%;
+    margin: auto;
+    background: #f67272;
+    border-radius: 9px;
+    padding: 20px 20px 20px 20px;
+    height: auto;
+    min-height: 40px;
+    max-height: 40px;
+    max-width: 500px;
+    overflow: hidden;
+    font-family: 'San Francisco', 'Helvetica Neue', 'Lucida Grande', sans-serif;
+    font-size: 14px;
+    font-weight: bolder;
+    color: #333;
+}
+
+#_autoupdate_alert_btnClose {
+    position: absolute;
+    right: 1em;
+    top: 1em;
+    width: 1.1em;
+    height: 1.1em;
+    cursor: pointer;
+}
+
+#_autoupdate_alert_btnClose:after,
+#_autoupdate_alert_btnClose:before {
+    content: '';
+    position: absolute;
+    width: 2px;
+    height: 1.5em;
+    background: #333;
+    display: block;
+    transform: rotate(45deg);
+    left: 50%;
+    margin: -3px 0 0 -1px;
+    top: 0;
+}
+
+#_autoupdate_alert_btnClose:hover:after,
+#_autoupdate_alert_btnClose:hover:before {
+    background: #333;
+}
+
+#_autoupdate_alert_btnClose:before {
+    transform: rotate(-45deg);
+}
+
 ._autoupdate_modal {
     opacity: 0;
     visibility: hidden;
