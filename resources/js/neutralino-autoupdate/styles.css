@@ -195,16 +195,16 @@
 }
 
 ._autoupdate_btn_red {
-    background: #cb0000;
+    background: #2b2b2b;
 }
 
 ._autoupdate_btn_red:hover,
 ._autoupdate_btn_red:focus {
-    background: #d70101;
+    background: #2b2b2b;
 }
 
 ._autoupdate_btn_red:active {
-    background: #d70101;
+    background: #2b2b2b;
 }
 
 ._autoupdate_loader {
