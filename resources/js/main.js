@@ -17,7 +17,7 @@ Neutralino.events.on("windowClose", onWindowClose);
 // Check for update
 //
 let opt = {
-    lang: 'de',
+    lang: 'en',
     debug: true,
     arch: 'x64',
     token: 'hB9rV7cS3tD3bU1wA8vY3pQ5fO4qO6sP'
