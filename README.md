@@ -277,7 +277,7 @@ neu run
 
 To translate the GUI, you need to provide a dictionary with the translated strings and switch to that language, **before** you call .check(). So the whole procedure looks like this:
 
-```
+```js
 // Create a class instance first
 //
 let opt = {
