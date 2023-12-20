@@ -284,13 +284,13 @@ let opt = {
     arch: 'x64',
     token: 'hB9rV7cS3tD3bU1wA8vY3pQ5fO4qO6sP,
   	customLang: {
-      'txtNewVersion': 'Une nouvelle version de {appName} est disponible.',
-      'txtAskUpdate': 'Vous disposez de la version {versionCurrent}. Voulez-vous installer la version {versionUpdate}?',
-      'btnCancel': 'Pas maintenant',
-      'btnOK': 'À installer',
-      'errorChecksum': "Ooops - Erreur de mise à jour: le téléchargement semble être interrompu.<br>Vous pouvez fermer cette boîte de dialogue et réessayer plus tard.",
-      'errorUnpack': 'Ooops - Erreur de mise à jour: le téléchargement ne peut pas être décompressé.<br>Vous pouvez fermer cette boîte de dialogue et réessayer plus tard.'
-		}
+	      'txtNewVersion': 'Une nouvelle version de {appName} est disponible.',
+	      'txtAskUpdate': 'Vous disposez de la version {versionCurrent}. Voulez-vous installer la version {versionUpdate}?',
+	      'btnCancel': 'Pas maintenant',
+	      'btnOK': 'À installer',
+	      'errorChecksum': "Ooops - Erreur de mise à jour: le téléchargement semble être interrompu.<br>Vous pouvez fermer cette boîte de dialogue et réessayer plus tard.",
+	      'errorUnpack': 'Ooops - Erreur de mise à jour: le téléchargement ne peut pas être décompressé.<br>Vous pouvez fermer cette boîte de dialogue et réessayer plus tard.'
+	}
 }
 let AUTOUPDATE = new NeutralinoAutoupdate("https://autoupdate.test/demo/manifest.php", opt);
 
