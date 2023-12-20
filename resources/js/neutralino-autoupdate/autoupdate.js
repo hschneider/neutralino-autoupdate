@@ -19,6 +19,7 @@ class NeutralinoAutoupdate {
         // opt arch: Architecture, defaults to x64
         // opt debug: Toggle console debug output
         // opt lang: Dialog language, defaults to en
+        // customLang: A custom language dict
 
         this.version = '1.1.7';
         this.debug = opt.debug || true;
