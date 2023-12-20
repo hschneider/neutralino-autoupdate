@@ -278,8 +278,6 @@ neu run
 To translate the GUI to **any language**, just submit the translated strings with the **customLang** parameter. So the whole procedure looks like this:
 
 ```js
-// Create a class instance with your custom language
-//
 let opt = {
     arch: 'x64',
     token: 'hB9rV7cS3tD3bU1wA8vY3pQ5fO4qO6sP,
@@ -293,9 +291,6 @@ let opt = {
 	}
 }
 let AUTOUPDATE = new NeutralinoAutoupdate("https://autoupdate.test/demo/manifest.php", opt);
-
-// Check for updates and display the GUI
-//
 (async () => {
     await AUTOUPDATE.check();
 })();
