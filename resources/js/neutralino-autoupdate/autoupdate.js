@@ -20,7 +20,7 @@ class NeutralinoAutoupdate {
         // opt debug: Toggle console debug output
         // opt lang: Dialog language, defaults to en
 
-        this.version = '1.1.6';
+        this.version = '1.1.7';
         this.debug = opt.debug || true;
 
         this.urlManifest = urlManifest;     // Manifest URL
@@ -66,6 +66,13 @@ class NeutralinoAutoupdate {
                 'errorChecksum': "Ooops - Update Error: Der Download ist anscheinend defekt.<br>Du kannst diesen Dialog schließen und es später noch mal versuchen.",
                 'errorUnpack': 'Ooops - Update Error: Der Download kann nicht entpackt werden.<br>Du kannst diesen Dialog schließen und es später noch mal versuchen.'
             }
+        }
+
+        // Overwrite with custom language
+        //
+        if(opt.customLang) {
+            this.langStrings['custom'] = opt.customLang;
+            this.lang = 'custom';
         }
 
         // Dialog onClick handler

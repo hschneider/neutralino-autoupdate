@@ -275,29 +275,24 @@ neu run
 
 ## Translate the GUI
 
-To translate the GUI to **any language**, you need to provide a dictionary with the translated strings and switch to that language, **before** you call .check(). So the whole procedure looks like this:
+To translate the GUI to **any language**, just submit the translated strings with the **customLang** parameter. So the whole procedure looks like this:
 
 ```js
-// Create a class instance first
+// Create a class instance with your custom language
 //
 let opt = {
     arch: 'x64',
-    token: 'hB9rV7cS3tD3bU1wA8vY3pQ5fO4qO6sP'
+    token: 'hB9rV7cS3tD3bU1wA8vY3pQ5fO4qO6sP,
+  	customLang: {
+      'txtNewVersion': 'Une nouvelle version de {appName} est disponible.',
+      'txtAskUpdate': 'Vous disposez de la version {versionCurrent}. Voulez-vous installer la version {versionUpdate}?',
+      'btnCancel': 'Pas maintenant',
+      'btnOK': 'À installer',
+      'errorChecksum': "Ooops - Erreur de mise à jour: le téléchargement semble être interrompu.<br>Vous pouvez fermer cette boîte de dialogue et réessayer plus tard.",
+      'errorUnpack': 'Ooops - Erreur de mise à jour: le téléchargement ne peut pas être décompressé.<br>Vous pouvez fermer cette boîte de dialogue et réessayer plus tard.'
+		}
 }
 let AUTOUPDATE = new NeutralinoAutoupdate("https://autoupdate.test/demo/manifest.php", opt);
-
-// Switch language to french
-//
-let langFR = {
-    'txtNewVersion': 'Une nouvelle version de {appName} est disponible.',
-    'txtAskUpdate': 'Vous disposez de la version {versionCurrent}. Voulez-vous installer la version {versionUpdate}?',
-    'btnCancel': 'Pas maintenant',
-    'btnOK': 'À installer',
-    'errorChecksum': "Ooops - Erreur de mise à jour: le téléchargement semble être interrompu.<br>Vous pouvez fermer cette boîte de dialogue et réessayer plus tard.",
-    'errorUnpack': 'Ooops - Erreur de mise à jour: le téléchargement ne peut pas être décompressé.<br>Vous pouvez fermer cette boîte de dialogue et réessayer plus tard.'
-}
-AUTOUPDATE.langStrings['fr'] = langFR;
-AUTOUPDATE.lang = 'fr';
 
 // Check for updates and display the GUI
 //
@@ -318,12 +313,13 @@ The **URL** can either point to **manifest.json** or the more secure PHP wrapper
 
 ### Options
 
-| Key   | Description                                                  |
-| ----- | ------------------------------------------------------------ |
-| arch  | The app's CPU architecture. By default **'x64'**             |
-| debug | Log all actions to the dev-console. This is **true** by default. |
-| lang  | The GUI language. **'en'** for english by default. You can set it to 'de' for german. |
-| token | The secret app token, used by **manifest.php**.              |
+| Key        | Description                                                  |
+| ---------- | ------------------------------------------------------------ |
+| arch       | The app's CPU architecture. By default **'x64'**             |
+| debug      | Log all actions to the dev-console. This is **true** by default. |
+| lang       | The GUI language. **'en'** for english by default. You can set it to 'de' for german. |
+| token      | The secret app token, used by **manifest.php**.              |
+| customLang | A dictionary with translated strings for your GUI custom language. For details see **'Translate the GUI'.** |
 
 ### Methods
 
@@ -334,15 +330,6 @@ The **URL** can either point to **manifest.json** or the more secure PHP wrapper
 | async checkSilent()   | Does the same as .check() but without dialog. If an update exists, it returns true. |
 | async update()        | Starts the update process. Returns false in case of an error or quits the app if the update was successful. This is either called from the update-dialog's install-button or directly after .checkSilent(). |
 | log(msg)              | The internal log function. msg can be a string or an object. This logs msg to the app's console. |
-
-### Properties
-
-| Property    | Descriptions                                                 |
-| ----------- | ------------------------------------------------------------ |
-| lang        | The current GUI language, default is 'en' for english. Also available is 'de' for german. |
-| langStrings | A dictionary of translated strings per language. For details see **'Translate the GUI'.** |
-
-
 
 ## More about Neutralino
 
