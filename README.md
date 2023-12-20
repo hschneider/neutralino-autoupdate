@@ -273,6 +273,41 @@ neu update
 neu run
 ```
 
+## Translate the GUI
+
+To translate the GUI, you need to provide a dictionary with the translated strings and switch to that language, **before** you call .check(). So the whole procedure looks like this:
+
+```
+// Create a class instance first
+//
+let opt = {
+    lang: 'en',
+    debug: true,
+    arch: 'x64',
+    token: 'hB9rV7cS3tD3bU1wA8vY3pQ5fO4qO6sP'
+}
+let AUTOUPDATE = new NeutralinoAutoupdate("https://autoupdate.test/demo/manifest.php", opt);
+
+// Switch language to french
+//
+let langFR = {
+    'txtNewVersion': 'Une nouvelle version de {appName} est disponible.',
+    'txtAskUpdate': 'Vous disposez de la version {versionCurrent}. Voulez-vous installer la version {versionUpdate}?',
+    'btnCancel': 'Pas maintenant',
+    'btnOK': 'À installer',
+    'errorChecksum': "Ooops - Erreur de mise à jour: le téléchargement semble être interrompu.<br>Vous pouvez fermer cette boîte de dialogue et réessayer plus tard.",
+    'errorUnpack': 'Ooops - Erreur de mise à jour: le téléchargement ne peut pas être décompressé.<br>Vous pouvez fermer cette boîte de dialogue et réessayer plus tard.'
+}
+AUTOUPDATE.langStrings['fr'] = langFR;
+AUTOUPDATE.lang = 'fr';
+
+// Check for updates and display the GUI
+//
+(async () => {
+    await AUTOUPDATE.check();
+})();
+```
+
 ## NeutralinoAutoupdate Class Overview
 
 ```JS
@@ -283,7 +318,7 @@ The class itself takes the **manifest's URL** and a dictionary of options as par
 
 The **URL** can either point to **manifest.json** or the more secure PHP wrapper **manifest.php**. If you use the wrapper, you need to submit a token with the options.
 
-**Options** are:
+### Options
 
 | Key   | Description                                                  |
 | ----- | ------------------------------------------------------------ |
@@ -292,7 +327,7 @@ The **URL** can either point to **manifest.json** or the more secure PHP wrapper
 | lang  | The GUI language. **'en'** for english by default. You can set it to 'de' for german. |
 | token | The secret app token, used by **manifest.php**.              |
 
-NeutralinoAutoupdate provides the following **methods**:
+### Methods
 
 | Method                | Description                                                  |
 | --------------------- | ------------------------------------------------------------ |
@@ -301,6 +336,15 @@ NeutralinoAutoupdate provides the following **methods**:
 | async checkSilent()   | Does the same as .check() but without dialog. If an update exists, it returns true. |
 | async update()        | Starts the update process. Returns false in case of an error or quits the app if the update was successful. This is either called from the update-dialog's install-button or directly after .checkSilent(). |
 | log(msg)              | The internal log function. msg can be a string or an object. This logs msg to the app's console. |
+
+### Properties
+
+| Property    | Descriptions                                                 |
+| ----------- | ------------------------------------------------------------ |
+| lang        | The current GUI language, default is 'en' for english. Also available is 'de' for german. |
+| langStrings | A dictionary of translated strings per language. For details see **'Translate the GUI'.** |
+
+
 
 ## More about Neutralino
 
