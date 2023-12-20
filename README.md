@@ -15,6 +15,7 @@ This cross-platform auto-updater comes with the following features:
 - The manifest is secured with an app token.
 - Written in pure JS, no Neutralino Extensions or other dependencies required.
 - The GUI can be translated to any language.
+  
 
 <img src="https://marketmix.com/git-assets/neutralino-autoupdate/neutralino-autoupdate.gif">
 
