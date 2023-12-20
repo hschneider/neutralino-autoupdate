@@ -275,7 +275,7 @@ neu run
 
 ## Translate the GUI
 
-To translate the GUI to **any language**, just submit the translated strings with the **customLang** parameter. So the whole procedure looks like this:
+To translate the GUI to **any language**, just submit the translated strings with the **customLang** parameter. So for e.g. a french translation the whole procedure looks like this:
 
 ```js
 let opt = {
