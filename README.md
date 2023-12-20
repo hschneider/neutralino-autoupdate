@@ -281,8 +281,6 @@ To translate the GUI, you need to provide a dictionary with the translated strin
 // Create a class instance first
 //
 let opt = {
-    lang: 'en',
-    debug: true,
     arch: 'x64',
     token: 'hB9rV7cS3tD3bU1wA8vY3pQ5fO4qO6sP'
 }
