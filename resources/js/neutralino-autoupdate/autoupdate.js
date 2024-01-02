@@ -21,7 +21,7 @@ class NeutralinoAutoupdate {
         // opt lang: Dialog language, defaults to en
         // opt customLang: A custom language dict
 
-        this.version = '1.1.8';
+        this.version = '1.1.9';
         this.debug = opt.debug || true;
 
         this.urlManifest = urlManifest;     // Manifest URL
@@ -32,7 +32,11 @@ class NeutralinoAutoupdate {
 
         this.appId = NL_APPID;              // App ID
         this.appVersion = NL_APPVERSION;    // App current version
-        this.appPath = NL_PATH;             // App root path
+
+        this.appRoot = NL_PATH;                             // App root path
+        this.appReources = this.appRoot + '/resources';     // App resources path
+        this.appReourcesJS = this.appReources + '/js';      // App JS resources
+        this.appResourcesBIN = this.appReources + '/bin';   // App BIN resources
 
         this.headers = new Headers();       // Custom request headers
         if(this.token !== '') {
@@ -91,12 +95,12 @@ class NeutralinoAutoupdate {
         // Initialize modal dialog.
         // Injects HTML, CSS and installs onCLick handler.
 
-        let d = await Neutralino.filesystem.readFile(this.appPath + '/resources/js/neutralino-autoupdate/styles.css');
+        let d = await Neutralino.filesystem.readFile(this.appReourcesJS + '/neutralino-autoupdate/styles.css');
         let e = document.createElement('style');
         e.appendChild(document.createTextNode(d));
         document.head.appendChild(e);
 
-        d = await Neutralino.filesystem.readFile(this.appPath + '/resources/js/neutralino-autoupdate/modal.html');
+        d = await Neutralino.filesystem.readFile(this.appReourcesJS + '/neutralino-autoupdate/modal.html');
 
         // Expand variables
         //
@@ -314,7 +318,7 @@ class NeutralinoAutoupdate {
         }
         await Neutralino.os.execCommand(cmd);
 
-        cmd = this.appPath + '/resources/bin/curl -k -o ' + this.pathDownload + f + ' -JL ' + url;
+        cmd = this.appReourcesBIN + '/curl -k -o ' + this.pathDownload + f + ' -JL ' + url;
         let res = await Neutralino.os.execCommand(cmd);
 
         // -- Validate
@@ -354,7 +358,7 @@ class NeutralinoAutoupdate {
             cmd = "unzip -o " + this.pathDownload + f + " -d " + this.pathDownload;
         }
         else {
-            cmd = this.appPath + "/resources/bin/unzip -o " + this.pathDownload + f + " -d " + this.pathDownload;
+            cmd = this.appReourcesBIN + "/unzip -o " + this.pathDownload + f + " -d " + this.pathDownload;
         }
         res = await Neutralino.os.execCommand(cmd);
         if(res.exitCode === 1) {
