@@ -7,7 +7,7 @@
 // - resources/bin/curl (on all platforms)
 // - CORS disabled on the server for HTML- and JSON-documents.
 //
-// (c)2023 Harald Schneider - marketmix.com
+// (c)2023-2024 Harald Schneider - marketmix.com
 
 class NeutralinoAutoupdate {
     constructor(urlManifest, opt= {}) {
@@ -21,7 +21,7 @@ class NeutralinoAutoupdate {
         // opt lang: Dialog language, defaults to en
         // opt customLang: A custom language dict
 
-        this.version = '1.1.7';
+        this.version = '1.1.8';
         this.debug = opt.debug || true;
 
         this.urlManifest = urlManifest;     // Manifest URL
@@ -29,6 +29,10 @@ class NeutralinoAutoupdate {
         this.os = NL_OS;                    // OS platform
         this.arch = opt.arch || 'x64';      // CPU architecture
         this.token = opt.token || '';       // X-Auth-App token
+
+        this.appId = NL_APPID;              // App ID
+        this.appVersion = NL_APPVERSION;    // App current version
+        this.appPath = NL_PATH;             // App root path
 
         this.headers = new Headers();       // Custom request headers
         if(this.token !== '') {
@@ -40,7 +44,7 @@ class NeutralinoAutoupdate {
 
         // Update target folder
         //
-        if(NL_OS === 'Darwin' || NL_OS === 'Linux') {
+        if(this.os === 'Darwin' || this.os === 'Linux') {
             this.pathDownload = '~/Downloads/';
         }
         else {
@@ -87,12 +91,12 @@ class NeutralinoAutoupdate {
         // Initialize modal dialog.
         // Injects HTML, CSS and installs onCLick handler.
 
-        let d = await Neutralino.filesystem.readFile(NL_PATH + '/resources/js/neutralino-autoupdate/styles.css');
+        let d = await Neutralino.filesystem.readFile(this.appPath + '/resources/js/neutralino-autoupdate/styles.css');
         let e = document.createElement('style');
         e.appendChild(document.createTextNode(d));
         document.head.appendChild(e);
 
-        d = await Neutralino.filesystem.readFile(NL_PATH + '/resources/js/neutralino-autoupdate/modal.html');
+        d = await Neutralino.filesystem.readFile(this.appPath + '/resources/js/neutralino-autoupdate/modal.html');
 
         // Expand variables
         //
@@ -104,7 +108,7 @@ class NeutralinoAutoupdate {
         d = d.replace('{txtNewVersion}', s);
 
         s = this.langStrings[this.lang]['txtAskUpdate'];
-        s = s.replace('{versionCurrent}', NL_APPVERSION);
+        s = s.replace('{versionCurrent}', this.appVersion);
         s = s.replace('{versionUpdate}', this.manifest.appVersion);
         d = d.replace('{txtAskUpdate}', s);
 
@@ -257,11 +261,11 @@ class NeutralinoAutoupdate {
                 this.log("check(): Manifest is disabled.");
                 return false;
             }
-            if(this.manifest.appId !== NL_APPID) {
+            if(this.manifest.appId !== this.appId) {
                 this.log("check(): App ID mismatch.");
                 return false;
             }
-            if(this.manifest.appVersion <= NL_APPVERSION) {
+            if(this.manifest.appVersion <= this.appVersion) {
                 this.log("check(): App version not higher.");
                 return false;
             }
@@ -302,7 +306,7 @@ class NeutralinoAutoupdate {
         let url = this.urlManifest.replace(/manifest.*$/, f);
         this.log("Downloading update: " + url);
 
-        if(NL_OS === 'Darwin' || NL_OS === 'Linux') {
+        if(this.os === 'Darwin' || this.os === 'Linux') {
             cmd = "rm " + this.pathDownload + f;
         }
         else {
@@ -310,13 +314,13 @@ class NeutralinoAutoupdate {
         }
         await Neutralino.os.execCommand(cmd);
 
-        cmd = NL_PATH + '/resources/bin/curl -k -o ' + this.pathDownload + f + ' -JL ' + url;
+        cmd = this.appPath + '/resources/bin/curl -k -o ' + this.pathDownload + f + ' -JL ' + url;
         let res = await Neutralino.os.execCommand(cmd);
 
         // -- Validate
         //
         this.log('Validating ...');
-        if(NL_OS === 'Darwin' || NL_OS === 'Linux') {
+        if(this.os === 'Darwin' || this.os === 'Linux') {
             cmd = "shasum -a 256 " + this.pathDownload + f + " | awk '{print $1}'"
         }
         else {
@@ -338,7 +342,7 @@ class NeutralinoAutoupdate {
         //
         this._loaderOff();
         this.log('Unpacking ...');
-        if(NL_OS === 'Darwin' || NL_OS === 'Linux') {
+        if(this.os === 'Darwin' || this.os === 'Linux') {
             cmd = "rm " + this.pathDownload + this.manifest[this.updKey]['start'];
         }
         else {
@@ -346,11 +350,11 @@ class NeutralinoAutoupdate {
         }
         await Neutralino.os.execCommand(cmd);
 
-        if(NL_OS === 'Darwin' || NL_OS === 'Linux') {
+        if(this.os === 'Darwin' || this.os === 'Linux') {
             cmd = "unzip -o " + this.pathDownload + f + " -d " + this.pathDownload;
         }
         else {
-            cmd = NL_PATH + "/resources/bin/unzip -o " + this.pathDownload + f + " -d " + this.pathDownload;
+            cmd = this.appPath + "/resources/bin/unzip -o " + this.pathDownload + f + " -d " + this.pathDownload;
         }
         res = await Neutralino.os.execCommand(cmd);
         if(res.exitCode === 1) {
@@ -363,7 +367,7 @@ class NeutralinoAutoupdate {
         // -- Launch
         //
         this.log('Launching ...');
-        if(NL_OS === 'Darwin' || NL_OS === 'Linux') {
+        if(this.os === 'Darwin' || this.os === 'Linux') {
             cmd = "rm " + this.pathDownload + f;
         }
         else {
@@ -371,7 +375,7 @@ class NeutralinoAutoupdate {
         }
         await Neutralino.os.execCommand(cmd);
 
-        if(NL_OS === 'Darwin') {
+        if(this.os === 'Darwin') {
             cmd = "osascript -e 'do shell script \"open -a Finder " + this.pathDownload + this.manifest[this.updKey]['start'] + "\" with administrator privileges'";
             this.log(cmd);
             res = await Neutralino.os.execCommand(cmd);
@@ -381,7 +385,7 @@ class NeutralinoAutoupdate {
                 return false;
             }
         }
-        if(NL_OS === 'Linux' || NL_OS === 'Windows') {
+        if(this.os === 'Linux' || this.os === 'Windows') {
             cmd = this.pathDownload + this.manifest[this.updKey]['start'];
             this.log(cmd);
             res = await Neutralino.os.spawnProcess(cmd);
