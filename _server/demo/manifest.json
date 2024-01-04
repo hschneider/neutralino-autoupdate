@@ -15,7 +15,7 @@
     {
       "file": "AutoupdateDemo_macos-x64.zip",
       "start": "start.dmg",
-      "checksum": "fc37472674da4e978ebec2eaf66abb5d1d9c1e033f3d11f1b1d2eec03e0eb612",
+      "checksum": "8b3a18106dc403dcf91669da79f5d0ed85f74cbf5c854f16ef1eb42c23520686",
       "notes": "release-notes.html"
     },
   "updateDarwinARM64":

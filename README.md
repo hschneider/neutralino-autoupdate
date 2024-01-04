@@ -143,7 +143,7 @@ The update keys point to the following fields:
 
 ## Update-Server Setup
 
-Copy all content from the **_server/demo** folder to your update server. Don't forget the **.htaccess-file.** The update zip-files are placed in the same folder as the manifest.
+Copy all content from the **_server/demo** folder to your update server.  The update zip-files are placed in the same folder as the manifest.
 
 If you are already live with autoupdate-enabled apps in the wild, disable the manifest by setting
 
@@ -160,19 +160,6 @@ Adapt the manifest's content and generate the **checksums** for each update-file
 shasum -a 256 FILE.zip
 # On Windows:
 certutil -hashfile FILE.zip SHA256
-```
-
-Make sure, that the **.htaccess-file** is located in the same folder as the manifest as well. This is necessary to allow CORS-requests from the Neutralino app to the update server.
-
-If you run a **NGINX** proxy server, you'll have to add this to your NGINX config:
-
-```bash
-location /path/to/your/update/folder {
-	add_header 'Access-Control-Allow-Origin'  '*';
-	add_header 'Access-Control-Allow-Methods' 'GET';
-	add_header 'Access-Control-Allow-Headers' 'Content-Type,X-Auth-App';
-	add_header 'Access-Control-Expose-Headers' 'Content-Length,X-Auth-App';
-}
 ```
 
 Next create a **secret security token** with some password generator of your choice and enter it in **manifest.php**:
@@ -317,13 +304,12 @@ The **URL** can either point to **manifest.json** or the more secure PHP wrapper
 
 ### Methods
 
-| Method                | Description                                                  |
-| --------------------- | ------------------------------------------------------------ |
-| addHeader(key, value) | Add an additional header to all fetch requests. This can be used for custom authentication, e.g. when you generate the manifest with a PHP script. |
-| async check()         | Check the update manifest's version against the app's version. If an update exists, the update-dialog pops up. |
-| async checkSilent()   | Does the same as .check() but without dialog. If an update exists, it returns true. |
-| async update()        | Starts the update process. Returns false in case of an error or quits the app if the update was successful. This is either called from the update-dialog's install-button or directly after .checkSilent(). |
-| log(msg)              | The internal log function. msg can be a string or an object. This logs msg to the app's console. |
+| Method              | Description                                                  |
+| ------------------- | ------------------------------------------------------------ |
+| async check()       | Check the update manifest's version against the app's version. If an update exists, the update-dialog pops up. |
+| async checkSilent() | Does the same as .check() but without dialog. If an update exists, it returns true. |
+| async update()      | Starts the update process. Returns false in case of an error or quits the app if the update was successful. This is either called from the update-dialog's install-button or directly after .checkSilent(). |
+| log(msg)            | The internal log function. msg can be a string or an object. This logs msg to the app's console. |
 
 ## More about Neutralino
 

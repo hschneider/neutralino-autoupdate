@@ -21,7 +21,7 @@ class NeutralinoAutoupdate {
         // opt lang: Dialog language, defaults to en
         // opt customLang: A custom language dict
 
-        this.version = '1.1.9';
+        this.version = '1.2.0';
         this.debug = opt.debug || true;
 
         this.urlManifest = urlManifest;     // Manifest URL
@@ -34,14 +34,9 @@ class NeutralinoAutoupdate {
         this.appVersion = NL_APPVERSION;    // App current version
 
         this.appRoot = NL_PATH;                             // App root path
-        this.appReources = this.appRoot + '/resources';     // App resources path
-        this.appReourcesJS = this.appReources + '/js';      // App JS resources
-        this.appResourcesBIN = this.appReources + '/bin';   // App BIN resources
-
-        this.headers = new Headers();       // Custom request headers
-        if(this.token !== '') {
-            this.addHeader('X-Auth-App', this.token);
-        }
+        this.appResources = this.appRoot + '/resources';     // App resources path
+        this.appReourcesJS = this.appResources + '/js';      // App JS resources
+        this.appResourcesBIN = this.appResources + '/bin';   // App BIN resources
 
         this.updKey = 'update' + this.os + this.arch.toUpperCase();     // Manifest update-key: updateOsARCH
         this.updating = false;              // True while .update() is running
@@ -122,12 +117,9 @@ class NeutralinoAutoupdate {
         // Import Release notes
         //
         let url = this.urlManifest.replace(/manifest.*$/, this.manifest[this.updKey]['notes']);
-        const response = await fetch(url, {
-            method: 'GET',
-            cache: 'no-store',
-            headers: this.headers
-        });
-        let notes = await response.text();
+        let cmd = this.appResourcesBIN + '/curl -k -H "X-Auth-App: ' + this.token + '" -X GET ' + url;
+        let res = await Neutralino.os.execCommand(cmd);
+        let notes = res.stdOut;
         d = d.replace('{notes}', notes);
 
         // Build modal
@@ -163,14 +155,6 @@ class NeutralinoAutoupdate {
         this.alertBtnClose.addEventListener('click', () => {
             this._alertClose();
         });
-    }
-    addHeader(key, val) {
-        //
-        // Add custom request-headers
-
-        this.headers.append(key, val);
-        console.log(this.headers)
-
     }
     _modalClose() {
         //
@@ -246,20 +230,10 @@ class NeutralinoAutoupdate {
         // Get manifest and check, if an update is available.
 
         try {
-            const response = await fetch(this.urlManifest, {
-                method: 'GET',
-                cache: 'no-store',
-                headers: this.headers
-            });
-            if (!response.ok) {
-                this.log('ERROR: check() response not OK.');
-                return false;
-            }
-
-            this.manifest = await response.json();
-
+            const cmd = this.appResourcesBIN + '/curl -k -H "Accept: application/json" -H "X-Auth-App: ' + this.token + '" -X GET ' + this.urlManifest;
+            const res = await Neutralino.os.execCommand(cmd);
+            this.manifest = JSON.parse(res.stdOut);
             this.log('check(): Received manifest:');
-            this.log(this.manifest);
 
             if(this.manifest.enabled === false) {
                 this.log("check(): Manifest is disabled.");
@@ -318,7 +292,7 @@ class NeutralinoAutoupdate {
         }
         await Neutralino.os.execCommand(cmd);
 
-        cmd = this.appReourcesBIN + '/curl -k -o ' + this.pathDownload + f + ' -JL ' + url;
+        cmd = this.appResourcesBIN + '/curl -k -o ' + this.pathDownload + f + ' -JL ' + url;
         let res = await Neutralino.os.execCommand(cmd);
 
         // -- Validate
