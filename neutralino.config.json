@@ -1,6 +1,6 @@
 {
   "$schema": "https://raw.githubusercontent.com/neutralinojs/neutralinojs/main/schemas/neutralino.config.schema.json",
-  "applicationId": "com.marketmix.neutralinoAutoupdateDemo",
+  "applicationId": "com.marketmix.neutralinoAutoupdate",
   "version": "1.0.0",
   "defaultMode": "window",
   "port": 0,
@@ -37,7 +37,7 @@
     }
   },
   "cli": {
-    "binaryName": "ext-bun",
+    "binaryName": "neutralino-autoupdate",
     "resourcesPath": "/resources/",
     "extensionsPath": "/extensions/",
     "clientLibrary": "/resources/js/neutralino.js",
