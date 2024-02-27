@@ -21,7 +21,7 @@ class NeutralinoAutoupdate {
         // opt lang: Dialog language, defaults to en
         // opt customLang: A custom language dict
 
-        this.version = '1.2.0';
+        this.version = '1.2.1';
         this.debug = opt.debug || true;
 
         this.urlManifest = urlManifest;     // Manifest URL
@@ -37,6 +37,10 @@ class NeutralinoAutoupdate {
         this.appResources = this.appRoot + '/resources';     // App resources path
         this.appReourcesJS = this.appResources + '/js';      // App JS resources
         this.appResourcesBIN = this.appResources + '/bin';   // App BIN resources
+
+        if(NL_OS === 'Windows') {
+            this.appResourcesBIN = NL_PATH + '/bin';
+        }
 
         this.updKey = 'update' + this.os + this.arch.toUpperCase();     // Manifest update-key: updateOsARCH
         this.updating = false;              // True while .update() is running

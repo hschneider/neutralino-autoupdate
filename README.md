@@ -193,6 +193,8 @@ Now all clients can process the manifest.
 
 ## Neutralino App Setup
 
+### Setup on all Platforms
+
 Copy the **_install/PLATFORM/bin** folder to your app's **resources** folder. E.g.
 
 `_install/macos-x64/bin --> resources/bin`
@@ -251,6 +253,19 @@ AUTOUPDATE.checkSilent().then(updateAvailable => {
 ```
 
 That's it. If something goes wrong, you can track all actions in your app's dev-console, as long as the debug parameter is true.
+
+### On Windows
+
+Since **curl.exe** has external depencies, move the `bin` folder out of your `resources` folder and let your installer place it on the same folder level like `resources.neu` like this:
+
+```
+app.exe
+resources.neu
+bin
+  curl.exe
+  libcurl-x64.dll
+  ...
+```
 
 ## Run the Demo
 
