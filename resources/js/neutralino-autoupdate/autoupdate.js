@@ -21,7 +21,7 @@ class NeutralinoAutoupdate {
         // opt lang: Dialog language, defaults to en
         // opt customLang: A custom language dict
 
-        this.version = '1.2.3';
+        this.version = '1.2.2';
         this.debug = opt.debug || true;
 
         this.urlManifest = urlManifest;     // Manifest URL
