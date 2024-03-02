@@ -3,8 +3,8 @@
 // An Auto-Updater for Neutralino.
 //
 // Requirements:
-// - resources/bin/unzip (on Windows, only)
-// - resources/bin/curl (on all platforms)
+// - extensions/autoupdate/bin/unzip (on Windows, only)
+// - extensions/autoupdate/bin/autoupdate (on all platforms)
 // - CORS disabled on the server for HTML- and JSON-documents.
 //
 // (c)2023-2024 Harald Schneider - marketmix.com
@@ -21,7 +21,7 @@ class NeutralinoAutoupdate {
         // opt lang: Dialog language, defaults to en
         // opt customLang: A custom language dict
 
-        this.version = '1.2.1';
+        this.version = '1.2.2';
         this.debug = opt.debug || true;
 
         this.urlManifest = urlManifest;     // Manifest URL
@@ -36,10 +36,10 @@ class NeutralinoAutoupdate {
         this.appRoot = NL_PATH;                             // App root path
         this.appResources = this.appRoot + '/resources';     // App resources path
         this.appReourcesJS = this.appResources + '/js';      // App JS resources
-        this.appResourcesBIN = this.appResources + '/bin';   // App BIN resources
 
-        if(NL_OS === 'Windows') {
-            this.appResourcesBIN = NL_PATH + '/bin';
+        this.appResourcesEXT = NL_PATH + '/extensions/autoupdate/bin';   // App BIN resources
+        if(NL_OS === 'Windows' ) {
+            this.appResourcesEXT = NL_CWD + '/extensions/autoupdate/bin';
         }
 
         this.updKey = 'update' + this.os + this.arch.toUpperCase();     // Manifest update-key: updateOsARCH
@@ -121,7 +121,7 @@ class NeutralinoAutoupdate {
         // Import Release notes
         //
         let url = this.urlManifest.replace(/manifest.*$/, this.manifest[this.updKey]['notes']);
-        let cmd = this.appResourcesBIN + '/curl -k -H "X-Auth-App: ' + this.token + '" -X GET ' + url;
+        let cmd = this.appResourcesEXT + '/curl -k -H "X-Auth-App: ' + this.token + '" -X GET ' + url;
         let res = await Neutralino.os.execCommand(cmd);
         let notes = res.stdOut;
         d = d.replace('{notes}', notes);
@@ -234,7 +234,7 @@ class NeutralinoAutoupdate {
         // Get manifest and check, if an update is available.
 
         try {
-            const cmd = this.appResourcesBIN + '/curl -k -H "Accept: application/json" -H "X-Auth-App: ' + this.token + '" -X GET ' + this.urlManifest;
+            const cmd = this.appResourcesEXT + '/curl -k -H "Accept: application/json" -H "X-Auth-App: ' + this.token + '" -X GET ' + this.urlManifest;
             const res = await Neutralino.os.execCommand(cmd);
             this.manifest = JSON.parse(res.stdOut);
             this.log('check(): Received manifest:');
@@ -296,7 +296,7 @@ class NeutralinoAutoupdate {
         }
         await Neutralino.os.execCommand(cmd);
 
-        cmd = this.appResourcesBIN + '/curl -k -o ' + this.pathDownload + f + ' -JL ' + url;
+        cmd = this.appResourcesEXT + '/curl -k -o ' + this.pathDownload + f + ' -JL ' + url;
         let res = await Neutralino.os.execCommand(cmd);
 
         // -- Validate
@@ -336,7 +336,7 @@ class NeutralinoAutoupdate {
             cmd = "unzip -o " + this.pathDownload + f + " -d " + this.pathDownload;
         }
         else {
-            cmd = this.appReourcesBIN + "/unzip -o " + this.pathDownload + f + " -d " + this.pathDownload;
+            cmd = this.appResourcesEXT + "/unzip -o " + this.pathDownload + f + " -d " + this.pathDownload;
         }
         res = await Neutralino.os.execCommand(cmd);
         if(res.exitCode === 1) {

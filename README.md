@@ -57,7 +57,7 @@ The manifest contains all information required by the update process:
 ```json
 {
   "enabled": true,
-  "appId": "com.marketmix.neutralinoAutoupdateDemo",
+  "appId": "com.marketmix.neutralinoAutoupdate",
   "appName": "Neutralino AutoUpdater Demo",
   "appVersion": "1.0.1",
   "appIcon": "icon.png",
@@ -195,14 +195,14 @@ Now all clients can process the manifest.
 
 ### Setup on all Platforms
 
-Copy the **_install/PLATFORM/bin** folder to your app's **resources** folder. E.g.
+Copy the contents of **_install/PLATFORM/bin** folder to your app's **/extensions/autoupdate/bin** folder. E.g.
 
-`_install/macos-x64/bin --> resources/bin`
+`_install/macos-x64/bin --> extensions/autoupdate/bin`
 
 If you are on **macOS** or **Linux**, make sure the binaries are executable:
 
 ```bash
-chmod -R +x resources/bin
+chmod -R +x extensions/autoupdate/bin
 ```
 
 Next copy the **js/neutralino-autoupdate folder** to your project. 
@@ -254,18 +254,21 @@ AUTOUPDATE.checkSilent().then(updateAvailable => {
 
 That's it. If something goes wrong, you can track all actions in your app's dev-console, as long as the debug parameter is true.
 
-### On Windows
+## Deployment
 
-Since **curl.exe** has external depencies, move the `bin` folder out of your `resources` folder and let your installer place it on the same folder level like `resources.neu` like this:
+### On Windows and Linux
+
+The `extensions` folder needs to be placed beside your `resources..neu` folder:
 
 ```
 app.exe
 resources.neu
-bin
-  curl.exe
-  libcurl-x64.dll
-  ...
+extensions
 ```
+
+### On macOS
+
+The `extensions` folder goes into your app bundle's `Resources` folder. This can be automated with **[Neutralino Build Scripts.](https://github.com/hschneider/neutralino-build-scripts)**
 
 ## Run the Demo
 

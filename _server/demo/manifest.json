@@ -1,6 +1,6 @@
 {
   "enabled": true,
-  "appId": "com.marketmix.neutralinoAutoupdateDemo",
+  "appId": "com.marketmix.neutralinoAutoupdate",
   "appName": "NeutralinoAutoupdate Demo",
   "appVersion": "1.0.1",
   "appIcon": "icon.png",
