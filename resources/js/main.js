@@ -12,6 +12,7 @@ Neutralino.events.on("windowClose", onWindowClose);
 //
 (async () => {
     await Neutralino.window.setTitle(`Neutralino Autoupdate ${NL_APPVERSION}`);
+    await Neutralino.window.show();
 })();
 
 // Check for update
