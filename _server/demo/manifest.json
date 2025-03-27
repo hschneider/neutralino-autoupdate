@@ -2,7 +2,7 @@
   "enabled": true,
   "appId": "com.marketmix.neutralinoAutoupdate",
   "appName": "NeutralinoAutoupdate Demo",
-  "appVersion": "1.0.1",
+  "appVersion": "1.0.2",
   "appIcon": "icon.png",
   "updateWindowsX64":
     {
