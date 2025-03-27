@@ -23,7 +23,7 @@ let opt = {
     arch: 'x64',
     token: 'hB9rV7cS3tD3bU1wA8vY3pQ5fO4qO6sP'
 }
-let AUTOUPDATE = new NeutralinoAutoupdate("https://autoupdate.test/demo/manifest.json", opt);
+let AUTOUPDATE = new NeutralinoAutoupdate("https://marketmix.com/demo/manifest.json", opt);
 
 (async () => {
     await AUTOUPDATE.check();
