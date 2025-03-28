@@ -1,0 +1,56 @@
+{
+  "enabled": true,
+  "appId": "com.marketmix.neutralinoAutoupdate",
+  "appName": "NeutralinoAutoupdate Demo",
+  "appVersion": "1.0.2",
+  "appIcon": "icon.png",
+  "updateWindowsX64":
+    {
+      "file": "AutoupdateDemo_win-x64.zip",
+      "checksum": "ed62fbbcf343c28ac9a3367cc4ea70f1b354baa31c53b1363bfe5afa93fb9e0f",
+      "start": "setup.exe",
+      "notes": "release-notes.html"
+    },
+  "updateDarwinX64":
+    {
+      "file": "AutoupdateDemo_macos-x64.zip",
+      "start": "start.dmg",
+      "checksum": "8b3a18106dc403dcf91669da79f5d0ed85f74cbf5c854f16ef1eb42c23520686",
+      "notes": "release-notes.html"
+    },
+  "updateDarwinARM64":
+  {
+    "file": "",
+    "checksum": "",
+    "start": "",
+    "notes": ""
+  },
+  "updateDarwinUNIVERSAL":
+  {
+    "file": "",
+    "checksum": "",
+    "start": "",
+    "notes": ""
+  },
+  "updateLinuxX64":
+    {
+      "file": "AutoupdateDemo_linux-x64.zip",
+      "checksum": "fc37472674da4e978ebec2eaf66abb5d1d9c1e033f3d11f1b1d2eec03e0eb612",
+      "start": "AutoupdateDemo_linux-x64/install.sh",
+      "notes": "release-notes.html"
+    },
+  "updateLinuxARM64":
+  {
+    "file": "",
+    "checksum": "",
+    "start": "",
+    "notes": ""
+  },
+  "updateLinuxARMHF":
+  {
+    "file": "",
+    "checksum": "",
+    "start": "",
+    "notes": ""
+  }
+}
