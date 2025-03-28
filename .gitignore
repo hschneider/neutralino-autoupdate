@@ -2,4 +2,5 @@
 /dist/
 /.idea/
 /bin/
-resources/js/.syncthing.main.js.tmp
+/_dotnet/neutralino-blazor/bin/
+/_dotnet/neutralino-blazor/obj/
